@@ -2,6 +2,9 @@
 using GestaoDeClientes.Application.Interfaces;
 using GestaoDeClientes.Infrastructure.Data;
 using GestaoDeClientes.Infrastructure.Repositories;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 
 namespace GestaoDeClientes.API

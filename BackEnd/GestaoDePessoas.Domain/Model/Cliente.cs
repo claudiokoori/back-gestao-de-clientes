@@ -16,6 +16,8 @@ namespace GestaoDeClientes.Domain.Model
         public string Telefone { get; set; }
         [DisplayName("Cliente Ativo")]
         public bool Ativo { get; set; }
+        public int? EnderecoId { get; set; }
+        public Endereco Endereco { get; set; }
 
     }
 }

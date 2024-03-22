@@ -1,6 +1,7 @@
 ﻿using GestaoDeClientes.Application.Interfaces;
 using GestaoDeClientes.Domain.Model;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace GestaoDeClientes.API.Controllers
 {

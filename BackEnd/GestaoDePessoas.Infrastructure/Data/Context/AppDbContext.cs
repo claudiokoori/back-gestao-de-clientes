@@ -18,6 +18,11 @@ namespace GestaoDeClientes.Infrastructure.Data.Context
             modelBuilder.Entity<Cliente>().HasIndex(p => p.CPF).IsUnique();
             modelBuilder.Entity<Cliente>().HasIndex(p => p.Telefone).IsUnique();
             modelBuilder.Entity<Cliente>().Property(p => p.Telefone).HasMaxLength(11);
+
+            modelBuilder.Entity<Endereco>().HasKey(e => e.Id);
+            modelBuilder.Entity<Endereco>().Ignore(i => i.Cliente);
+
+            modelBuilder.Entity<Cliente>().HasOne<Endereco>(e => e.Endereco).WithOne(e => e.Cliente).HasForeignKey<Cliente>(c => c.EnderecoId); 
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
