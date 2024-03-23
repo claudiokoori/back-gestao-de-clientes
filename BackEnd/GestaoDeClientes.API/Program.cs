@@ -1,4 +1,5 @@
 
+using GestaoDeClientes.API.Extension;
 using GestaoDeClientes.Application.Interfaces;
 using GestaoDeClientes.Infrastructure.Data;
 using GestaoDeClientes.Infrastructure.Repositories;
@@ -14,6 +15,7 @@ namespace GestaoDeClientes.API
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            builder.Services.AddSwagger();
 
             // Add services to the container.
 
@@ -21,9 +23,11 @@ namespace GestaoDeClientes.API
             builder.Services.AddScoped<ICadastroCliente, CadastroCliente>();
 
             builder.Services.AddControllers();
+            builder.Services.AddEndpointsApiExplorer();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
 
             var app = builder.Build();
 
