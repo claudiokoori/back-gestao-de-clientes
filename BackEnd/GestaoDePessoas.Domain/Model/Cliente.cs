@@ -1,10 +1,12 @@
 ﻿using GestaoDeClientes.Domain.Enum;
 using System.ComponentModel;
+using System.Text.Json.Serialization;
 
 namespace GestaoDeClientes.Domain.Model
 {
     public class Cliente
     {
+        [JsonIgnore]
         public int Id { get; set; }
         [DisplayName("Nome Completo")]
         public string NomeCompleto { get; set; }
