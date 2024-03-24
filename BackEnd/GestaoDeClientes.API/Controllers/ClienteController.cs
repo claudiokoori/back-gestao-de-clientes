@@ -1,5 +1,7 @@
 ﻿using GestaoDeClientes.Application.Interfaces;
 using GestaoDeClientes.Domain.Model;
+
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -16,13 +18,27 @@ namespace GestaoDeClientes.API.Controllers
             _client = client;
         }
 
+        /// <summary>
+        /// Endpoint responsável por consultar o cliente pelo id.
+        /// </summary>
+        /// <param name="id">Código de identificação</param>
+        /// <returns>Returna o resultado da operação com objeto preenchido.</returns>
+        [ProducesResponseType(typeof(Cliente), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
         [HttpGet("{id:int}")]
         public async Task<ActionResult<Cliente>> Get(int id)
         {
             var result = await _client.GetByIdAsync(id);
             if (result is null)
             {
-                return NotFound();
+                return NotFound(new
+                {
+                    Instance = $"api/Clientes/{id}",
+                    status = 404,
+                    error = "Recurso não encontrado",
+                    message = "Ocorreu um erro ao tentar encontrar seu cliente.",
+                    Method = "Get",
+                });
             }
             return Ok(result);
         }

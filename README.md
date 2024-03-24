@@ -12,3 +12,6 @@ Utilizei também das seguintes tecnologias, softwares e pacotes:
 
 ## V1.0
 - Criação da API
+
+## V1.5
+- Criação da Tabela de Endereço
