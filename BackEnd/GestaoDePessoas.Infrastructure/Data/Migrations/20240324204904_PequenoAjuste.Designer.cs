@@ -4,6 +4,7 @@ using GestaoDeClientes.Infrastructure.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GestaoDeClientes.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240324204904_PequenoAjuste")]
+    partial class PequenoAjuste
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -144,9 +147,9 @@ namespace GestaoDeClientes.Infrastructure.Data.Migrations
                         .HasAnnotation("Relational:JsonPropertyName", "uf");
 
                     b.HasKey("Id")
-                        .HasName("pk_enderecos");
+                        .HasName("pk_endereco");
 
-                    b.ToTable("enderecos", (string)null);
+                    b.ToTable("endereco", (string)null);
                 });
 
             modelBuilder.Entity("GestaoDeClientes.Domain.Model.Cliente", b =>
@@ -154,8 +157,7 @@ namespace GestaoDeClientes.Infrastructure.Data.Migrations
                     b.HasOne("GestaoDeClientes.Domain.Model.Endereco", "Endereco")
                         .WithOne("Cliente")
                         .HasForeignKey("GestaoDeClientes.Domain.Model.Cliente", "EnderecoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .HasConstraintName("fk_clientes_enderecos_endereco_id");
+                        .HasConstraintName("fk_clientes_endereco_endereco_id");
 
                     b.Navigation("Endereco");
                 });

@@ -9,7 +9,7 @@ namespace GestaoDeClientes.Domain.Model
 {
     public class Endereco
     {
-        [JsonIgnore]
+        
         public int Id { get; set; }
         [JsonPropertyName("cep")]
         public string Cep { get; set; }
@@ -44,6 +44,7 @@ namespace GestaoDeClientes.Domain.Model
         public string Casa { get; set; }
 
         [JsonIgnore]
-        public Cliente? Cliente { get; set; }
+        public Cliente Cliente { get; set; }
+
     }
 }

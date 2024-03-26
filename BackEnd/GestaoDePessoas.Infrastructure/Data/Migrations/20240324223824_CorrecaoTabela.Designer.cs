@@ -4,6 +4,7 @@ using GestaoDeClientes.Infrastructure.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GestaoDeClientes.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240324223824_CorrecaoTabela")]
+    partial class CorrecaoTabela
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -154,7 +157,6 @@ namespace GestaoDeClientes.Infrastructure.Data.Migrations
                     b.HasOne("GestaoDeClientes.Domain.Model.Endereco", "Endereco")
                         .WithOne("Cliente")
                         .HasForeignKey("GestaoDeClientes.Domain.Model.Cliente", "EnderecoId")
-                        .OnDelete(DeleteBehavior.Cascade)
                         .HasConstraintName("fk_clientes_enderecos_endereco_id");
 
                     b.Navigation("Endereco");

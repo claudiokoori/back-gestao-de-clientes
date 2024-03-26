@@ -18,6 +18,13 @@ namespace GestaoDeClientes.API.Controllers
             _client = client;
         }
 
+        [HttpGet]
+        public async Task<ActionResult<Cliente>> Get()
+        {
+            var result = await _client.GetAllAsync();
+            return Ok(result);
+        }
+
         /// <summary>
         /// Endpoint responsável por consultar o cliente pelo id.
         /// </summary>

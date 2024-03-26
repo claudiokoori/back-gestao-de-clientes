@@ -14,9 +14,16 @@ namespace GestaoDeClientes.Infrastructure.Repositories
             _context = context;
         }
 
+        public async Task<IEnumerable<Cliente>> GetAllAsync()
+        {
+            var result = await _context.Clientes.Include(c => c.Endereco).ToListAsync();
+            
+            return result;
+        }
+
         public async Task<Cliente> GetByIdAsync(int id)
         {
-            var result = await _context.Clientes.FindAsync(id);
+            var result = await _context.Clientes.Include(c => c.Endereco).FirstOrDefaultAsync(c => c.Id == id);
             return result;
         }
 
@@ -29,17 +36,19 @@ namespace GestaoDeClientes.Infrastructure.Repositories
 
         public async Task<Cliente> UpdateAsync(int id, Cliente user)
         {
-            _context.Entry(user).State = EntityState.Modified;
+            _context.Update(user);
             await _context.SaveChangesAsync();
             return user;
         }
 
         public async Task<bool> DeleteAsync(int id)
         {
-            var result = await _context.Clientes.FirstOrDefaultAsync(u => u.Id == id);
+            var result = await _context.Clientes.Include(c => c.Endereco).FirstOrDefaultAsync(u => u.Id == id);
             _context.Clientes.Remove(result);
+            _context.Enderecos.Remove(result.Endereco);
             await _context.SaveChangesAsync();
             return true;
         }
+
     }
 }
