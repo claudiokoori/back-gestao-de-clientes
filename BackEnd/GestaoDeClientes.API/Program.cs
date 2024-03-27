@@ -2,10 +2,13 @@
 using GestaoDeClientes.API.Extension;
 using GestaoDeClientes.Application.Interfaces;
 using GestaoDeClientes.Infrastructure.Data;
+using GestaoDeClientes.Infrastructure.Extensions;
+using GestaoDeClientes.Infrastructure.Services;
 using GestaoDeClientes.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+
 
 
 namespace GestaoDeClientes.API
@@ -33,6 +36,10 @@ namespace GestaoDeClientes.API
 
             builder.Services.AddPersistenceInfrastructure(builder.Configuration);
             builder.Services.AddScoped<ICadastroCliente, CadastroCliente>();
+
+            builder.Services.AddSingleton<ITokenService, TokenService>();
+
+            builder.Services.AddJwtConfiguration(builder.Configuration);
 
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
